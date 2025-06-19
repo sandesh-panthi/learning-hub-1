@@ -1,0 +1,1918 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learning Hub | Class 11 Preparation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        :root {
+            --primary: #6a11cb;
+            --secondary: #2575fc;
+            --accent: #ff6b6b;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --success: #4cc9f0;
+            --warning: #ffd166;
+            --text: #2d3748;
+            --math: #4361ee;
+            --physics: #f72585;
+            --chemistry: #4cc9f0;
+            --biology: #2ec4b6;
+            --english: #ff9f1c;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa, #e4edf9);
+            color: var(--text);
+            min-height: 100vh;
+            overflow-x: hidden;
+            background-attachment: fixed;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 5%;
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 800;
+            font-size: 1.8rem;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .logo i {
+            color: var(--accent);
+            font-size: 2.2rem;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 0.5rem 0;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+            border-radius: 10px;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .user-info img {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--primary);
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 1.2rem;
+            align-items: center;
+        }
+
+        .auth-btn {
+            padding: 0.7rem 1.8rem;
+            border-radius: 30px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+        }
+
+        .login-btn {
+            background: var(--primary);
+            color: white;
+        }
+
+        .signup-btn {
+            background: var(--accent);
+            color: white;
+        }
+
+        .auth-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .logout-btn {
+            background: #f8f9fa;
+            color: var(--accent);
+            border: 2px solid var(--accent);
+            padding: 0.5rem 1.2rem;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .logout-btn:hover {
+            background: var(--accent);
+            color: white;
+        }
+
+        .page {
+            display: none;
+            padding: 3rem 5%;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 4rem 0 6rem;
+            gap: 3rem;
+        }
+
+        .hero-content {
+            flex: 1;
+        }
+
+        .hero h1 {
+            font-size: 3.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+            line-height: 1.2;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .hero h1 span {
+            position: relative;
+            background: linear-gradient(120deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: #555;
+            margin-bottom: 2rem;
+            line-height: 1.7;
+            max-width: 600px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            padding: 1.1rem 2.2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.1rem;
+            box-shadow: 0 7px 20px rgba(0, 0, 0, 0.12);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .primary-btn {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+        }
+
+        .primary-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .secondary-btn {
+            background: white;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .secondary-btn:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-5px);
+        }
+
+        .hero-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            position: relative;
+        }
+
+        .founder-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+            text-align: center;
+            width: 320px;
+            transition: transform 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .founder-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .founder-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+        }
+
+        .founder-img {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid var(--light);
+            margin: 0 auto 1.5rem;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 4rem;
+            font-weight: bold;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+        }
+
+        .founder-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .founder-name {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+            font-weight: 700;
+        }
+
+        .founder-title {
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 3rem;
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 0 1.5rem;
+        }
+
+        .stat-number {
+            font-size: 2.8rem;
+            font-weight: 800;
+            background: linear-gradient(120deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-text {
+            font-size: 1.1rem;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .about-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+            font-size: 2.8rem;
+            color: var(--dark);
+            font-weight: 800;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .section-title span {
+            background: linear-gradient(120deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            border-radius: 10px;
+        }
+
+        .about-content {
+            display: flex;
+            gap: 3rem;
+            margin-bottom: 4rem;
+        }
+
+        .about-text {
+            flex: 2;
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .about-text h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .about-text p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 1.5rem;
+        }
+
+        .founder-card {
+            flex: 1;
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.4s ease;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-title {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+            font-weight: 700;
+        }
+
+        .feature-desc {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .subjects-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 3rem 0;
+        }
+
+        .subjects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .subject-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s ease;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .subject-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+        }
+
+        .subject-header {
+            height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .subject-icon {
+            font-size: 4rem;
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .subject-content {
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .subject-title {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+            font-weight: 700;
+        }
+
+        .subject-desc {
+            color: #666;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+            font-size: 1.1rem;
+        }
+
+        .subject-stats {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 1.5rem;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        .stat-label {
+            color: #777;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .question-bank {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 3rem 0;
+        }
+
+        .quiz-container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+            padding: 3rem;
+            position: relative;
+        }
+
+        .quiz-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .quiz-title {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+            font-weight: 800;
+        }
+
+        .quiz-subtitle {
+            color: var(--primary);
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: #e2e8f0;
+            border-radius: 4px;
+            margin: 2rem 0;
+            overflow: hidden;
+        }
+
+        .progress {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.5s ease;
+        }
+
+        .question-counter {
+            text-align: right;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .question {
+            margin-bottom: 2.5rem;
+            padding-bottom: 2rem;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .question-text {
+            font-size: 1.4rem;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+            color: var(--dark);
+            line-height: 1.5;
+        }
+
+        .options {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+
+        .option {
+            padding: 1.2rem 1.5rem;
+            background: #f8f9fa;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .option:hover {
+            background: #edf2f7;
+            border-color: #cbd5e0;
+        }
+
+        .option.selected {
+            background: #ebf8ff;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.2);
+        }
+
+        .option input[type="radio"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        .results-container {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 3rem 0;
+        }
+
+        .result-card {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+            padding: 3.5rem;
+            text-align: center;
+        }
+
+        .result-title {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+            font-weight: 800;
+        }
+
+        .result-score {
+            font-size: 5rem;
+            font-weight: 800;
+            background: linear-gradient(120deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin: 2rem 0;
+        }
+
+        .result-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin: 2.5rem 0;
+        }
+
+        .result-stat {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 15px;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-value {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .auth-container {
+            display: flex;
+            min-height: 80vh;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .auth-card {
+            background: white;
+            border-radius: 25px;
+            box-shadow: 0 25px 60px -12px rgba(0, 0, 0, 0.25);
+            width: 100%;
+            max-width: 1000px;
+            display: flex;
+            overflow: hidden;
+        }
+
+        .auth-image {
+            flex: 1;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 3rem;
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .auth-image::before {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            top: -50px;
+            right: -50px;
+        }
+
+        .auth-image::after {
+            content: '';
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            bottom: -50px;
+            left: -50px;
+        }
+
+        .auth-content {
+            flex: 1;
+            padding: 3.5rem;
+            position: relative;
+        }
+
+        .auth-tabs {
+            display: flex;
+            margin-bottom: 2.5rem;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .tab {
+            padding: 1rem 2rem;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .tab.active {
+            color: var(--primary);
+        }
+
+        .tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--primary);
+            border-radius: 3px;
+        }
+
+        .auth-title {
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+
+        .auth-subtitle {
+            color: #666;
+            margin-bottom: 2.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.8rem;
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+            color: #555;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 1.2rem 1.5rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+            outline: none;
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #777;
+        }
+
+        .auth-btn {
+            width: 100%;
+            padding: 1.2rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .auth-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 20px rgba(67, 97, 238, 0.4);
+        }
+
+        .auth-footer {
+            text-align: center;
+            margin-top: 2rem;
+            color: #666;
+        }
+
+        .auth-footer a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .auth-content > * {
+            animation: slideIn 0.6s ease forwards;
+        }
+
+        .welcome-message {
+            text-align: center;
+            margin: 2rem 0;
+            font-size: 1.5rem;
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        @media (max-width: 992px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .cta-buttons {
+                justify-content: center;
+            }
+            
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .auth-card {
+                flex-direction: column;
+            }
+            
+            .nav-links {
+                gap: 1.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                gap: 1.5rem;
+                padding: 1.5rem 5%;
+            }
+            
+            .stats {
+                flex-direction: column;
+                gap: 2.5rem;
+            }
+            
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            .section-title {
+                font-size: 2.3rem;
+            }
+            
+            .result-stats {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .subject-card {
+                max-width: 350px;
+                margin: 0 auto;
+            }
+            
+            .auth-tabs {
+                flex-direction: column;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="logo">
+            <i class="fas fa-book"></i>
+            <span>Learning Hub</span>
+        </div>
+        <div class="nav-links">
+            <a href="#" onclick="showPage('home')">Home</a>
+            <a href="#" onclick="showPage('about')">About</a>
+            <a href="#" onclick="showPage('subjects')">Question Collection</a>
+        </div>
+        <div id="user-section" class="auth-buttons" style="display: none;">
+            <div class="user-info">
+                <img src="im.jpg" alt="User">
+                <span id="username-display">User</span>
+            </div>
+            <button class="logout-btn" onclick="logout()">Logout</button>
+        </div>
+        <div id="auth-buttons" class="auth-buttons">
+            <a href="#" onclick="showPage('auth')" class="auth-btn login-btn">Login</a>
+            <a href="#" onclick="showPage('auth')" class="auth-btn signup-btn">Sign Up</a>
+        </div>
+    </nav>
+
+    <!-- Home Page -->
+    <section id="home" class="page active">
+        <div id="welcome-user" class="welcome-message" style="display: none;">
+            Welcome back, <span id="welcome-name">User</span>! Ready to continue your preparation?
+        </div>
+        <div class="hero">
+            <div class="hero-content">
+                <h1>Ace Your <span>Class 11 Entrance</span> with Expert Preparation</h1>
+                <p>Learning Hub provides comprehensive MCQ practice for Class 11 entrance exams. Access thousands of questions, detailed solutions, and performance analytics to boost your preparation.</p>
+                <div class="cta-buttons">
+                    <a href="#" onclick="showPage('subjects')" class="btn primary-btn">
+                        <i class="fas fa-book-open"></i> Explore Subjects
+                    </a>
+                    <a href="#" onclick="showPage('auth')" class="btn secondary-btn">
+                        <i class="fas fa-user-graduate"></i> Get Started
+                    </a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="founder-card">
+                    <div class="founder-img">
+                        <img src="im.jpg" alt="Sandesh Panthi">
+                    </div>
+                    <h3 class="founder-name">Sandesh Panthi</h3>
+                    <div class="founder-title">Founder & Chief Educator</div>
+                    <p>1+ years of experience in education and mentorship</p>
+                    <div class="social-links" style="margin-top: 1.5rem;">
+                        <i class="fab fa-linkedin" style="margin: 0 10px; font-size: 1.5rem; color: var(--primary);"></i>
+                        <i class="fab fa-twitter" style="margin: 0 10px; font-size: 1.5rem; color: var(--primary);"></i>
+                        <i class="fab fa-instagram" style="margin: 0 10px; font-size: 1.5rem; color: var(--primary);"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="stats">
+            <div class="stat-item">
+                <div class="stat-number">5,000+</div>
+                <div class="stat-text">MCQ Questions</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">10+</div>
+                <div class="stat-text">Years Question Papers</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">98%</div>
+                <div class="stat-text">Success Rate</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">24/7</div>
+                <div class="stat-text">Access Anywhere</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Page -->
+    <section id="about" class="page">
+        <div class="about-container">
+            <h2 class="section-title">About <span>Learning Hub</span></h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Our Mission</h3>
+                    <p>Learning Hub was created to democratize quality education for Class 11 entrance exam preparation. We recognized the challenges students face in accessing comprehensive study materials and expert guidance.</p>
+                    
+                    <h3>What We Offer</h3>
+                    <p>Our platform provides meticulously curated MCQ questions across all subjects, designed by experienced educators to mirror actual exam patterns. Each question comes with detailed solutions and explanations to help students understand concepts thoroughly.</p>
+                    
+                    <h3>Unique Approach</h3>
+                    <p>What sets Learning Hub apart is our adaptive learning system that identifies your strengths and weaknesses, providing personalized practice recommendations to maximize your preparation efficiency.</p>
+                    
+                    <h3>For Students, By Educators</h3>
+                    <p>Founded by Sandesh Panthi, an educator with over 15 years of experience, Learning Hub is built on the principle that every student deserves access to high-quality educational resources regardless of their background or location.</p>
+                </div>
+                <div class="founder-card">
+                    <div class="founder-img">
+                        <img src="img.jpg" alt="Sandesh Panthi">
+                    </div>
+                    <h3 class="founder-name">Sandesh Panthi</h3>
+                    <div class="founder-title">Founder & Chief Educator</div>
+                    <p>1+ years of experience in education and mentorship</p>
+                    <div class="social-links" style="margin-top: 1.5rem;">
+                        <i class="fab fa-linkedin" style="margin: 0 10px; font-size: 1.5rem; color: var(--primary);"></i>
+                        <i class="fab fa-twitter" style="margin: 0 10px; font-size: 1.5rem; color: var(--primary);"></i>
+                        <i class="fab fa-instagram" style="margin: 0 10px; font-size: 1.5rem; color: var(--primary);"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="features">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <h3 class="feature-title">Quality Content</h3>
+                    <p class="feature-desc">All questions are verified by subject experts and updated annually to match the latest syllabus.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 class="feature-title">Performance Analytics</h3>
+                    <p class="feature-desc">Track your progress with detailed reports and personalized insights.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3 class="feature-title">Mobile Friendly</h3>
+                    <p class="feature-desc">Study anytime, anywhere with our responsive platform.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3 class="feature-title">Doubt Support</h3>
+                    <p class="feature-desc">Get your doubts resolved by experts within 24 hours.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Subjects Page -->
+    <section id="subjects" class="page">
+        <div class="subjects-container">
+            <h2 class="section-title">Question <span>Collection</span></h2>
+            <div class="subjects-grid">
+                <!-- Math -->
+                <div class="subject-card" onclick="showQuestionBank('math')">
+                    <div class="subject-header" style="background: linear-gradient(135deg, var(--math), #3a0ca3);">
+                        <div class="subject-icon">
+                            <i class="fas fa-calculator"></i>
+                        </div>
+                    </div>
+                    <div class="subject-content">
+                        <h3 class="subject-title">Mathematics</h3>
+                        <p class="subject-desc">Algebra, Trigonometry, Calculus, Geometry, and Statistics with 1200+ questions.</p>
+                        <div class="subject-stats">
+                            <div class="stat">
+                                <div class="stat-value">1,250</div>
+                                <div class="stat-label">Questions</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">15</div>
+                                <div class="stat-label">Chapters</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Physics -->
+                <div class="subject-card" onclick="showQuestionBank('physics')">
+                    <div class="subject-header" style="background: linear-gradient(135deg, var(--physics), #b5179e);">
+                        <div class="subject-icon">
+                            <i class="fas fa-atom"></i>
+                        </div>
+                    </div>
+                    <div class="subject-content">
+                        <h3 class="subject-title">Physics</h3>
+                        <p class="subject-desc">Mechanics, Thermodynamics, Electromagnetism, Optics, and Modern Physics.</p>
+                        <div class="subject-stats">
+                            <div class="stat">
+                                <div class="stat-value">980</div>
+                                <div class="stat-label">Questions</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">12</div>
+                                <div class="stat-label">Chapters</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chemistry -->
+                <div class="subject-card" onclick="showQuestionBank('chemistry')">
+                    <div class="subject-header" style="background: linear-gradient(135deg, var(--chemistry), #4895ef);">
+                        <div class="subject-icon">
+                            <i class="fas fa-flask"></i>
+                        </div>
+                    </div>
+                    <div class="subject-content">
+                        <h3 class="subject-title">Chemistry</h3>
+                        <p class="subject-desc">Physical, Organic, Inorganic Chemistry with 900+ questions and solutions.</p>
+                        <div class="subject-stats">
+                            <div class="stat">
+                                <div class="stat-value">950</div>
+                                <div class="stat-label">Questions</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">14</div>
+                                <div class="stat-label">Chapters</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Biology -->
+                <div class="subject-card" onclick="showQuestionBank('biology')">
+                    <div class="subject-header" style="background: linear-gradient(135deg, var(--biology), #1a936f);">
+                        <div class="subject-icon">
+                            <i class="fas fa-dna"></i>
+                        </div>
+                    </div>
+                    <div class="subject-content">
+                        <h3 class="subject-title">Biology</h3>
+                        <p class="subject-desc">Botany, Zoology, Genetics, Ecology and Human Physiology with diagrams.</p>
+                        <div class="subject-stats">
+                            <div class="stat">
+                                <div class="stat-value">870</div>
+                                <div class="stat-label">Questions</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">10</div>
+                                <div class="stat-label">Chapters</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- English -->
+                <div class="subject-card" onclick="showQuestionBank('english')">
+                    <div class="subject-header" style="background: linear-gradient(135deg, var(--english), #ff5400);">
+                        <div class="subject-icon">
+                            <i class="fas fa-book"></i>
+                        </div>
+                    </div>
+                    <div class="subject-content">
+                        <h3 class="subject-title">English</h3>
+                        <p class="subject-desc">Grammar, Comprehension, Vocabulary, Literature and Writing Skills.</p>
+                        <div class="subject-stats">
+                            <div class="stat">
+                                <div class="stat-value">750</div>
+                                <div class="stat-label">Questions</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">8</div>
+                                <div class="stat-label">Chapters</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Question Bank Page -->
+    <section id="question-bank" class="page">
+        <div class="question-bank">
+            <div class="quiz-container">
+                <div class="quiz-header">
+                    <h2 class="quiz-title" id="quiz-subject-title">Physics Practice</h2>
+                    <p class="quiz-subtitle">Class 11 Entrance Preparation</p>
+                </div>
+                
+                <div class="progress-bar">
+                    <div class="progress" id="quiz-progress" style="width: 10%;"></div>
+                </div>
+                
+                <div class="question-counter">Question <span id="current-question">1</span> of 10</div>
+                
+                <div id="question-container">
+                    <!-- Questions will be loaded dynamically -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Results Page -->
+    <section id="results" class="page">
+        <div class="results-container">
+            <div class="result-card">
+                <h2 class="result-title">Your Test Results</h2>
+                <div class="result-score" id="result-score">8/10</div>
+                
+                <div class="result-stats">
+                    <div class="result-stat">
+                        <div class="stat-label">Questions Attempted</div>
+                        <div class="stat-value" id="attempted">10</div>
+                    </div>
+                    <div class="result-stat">
+                        <div class="stat-label">Correct Answers</div>
+                        <div class="stat-value" id="correct">8</div>
+                    </div>
+                    <div class="result-stat">
+                        <div class="stat-label">Wrong Answers</div>
+                        <div class="stat-value" id="wrong">2</div>
+                    </div>
+                    <div class="result-stat">
+                        <div class="stat-label">Accuracy</div>
+                        <div class="stat-value" id="accuracy">80%</div>
+                    </div>
+                </div>
+                
+                <p style="font-size: 1.2rem; color: #555; margin-top: 2rem;">
+                    "Education is the passport to the future, for tomorrow belongs to those who prepare for it today."<br>
+                    - <strong>Sandesh Panthi</strong>, Founder
+                </p>
+                
+                <div class="action-buttons">
+                    <a href="#" onclick="showPage('subjects')" class="btn primary-btn">
+                        <i class="fas fa-book"></i> Try Another Subject
+                    </a>
+                    <a href="#" onclick="showPage('home')" class="btn secondary-btn">
+                        <i class="fas fa-home"></i> Back to Home
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Auth Page -->
+    <section id="auth" class="page">
+        <div class="auth-container">
+            <div class="auth-card">
+                <div class="auth-image">
+                    <div>
+                        <i class="fas fa-user-graduate" style="font-size: 5rem; margin-bottom: 2rem;"></i>
+                        <h2 style="font-size: 2.5rem; margin-bottom: 1rem;">Welcome to Learning Hub!</h2>
+                        <p style="font-size: 1.2rem; max-width: 350px;">Login to access thousands of MCQs and track your progress</p>
+                    </div>
+                </div>
+                <div class="auth-content">
+                    <div class="auth-tabs">
+                        <div class="tab active" onclick="switchTab('login')">Login</div>
+                        <div class="tab" onclick="switchTab('signup')">Sign Up</div>
+                    </div>
+                    
+                    <div id="login-form">
+                        <h2 class="auth-title">Login to Your Account</h2>
+                        <p class="auth-subtitle">Enter your credentials to continue your preparation</p>
+                        
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" class="form-control" placeholder="Enter your email">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" id="password" class="form-control" placeholder="Enter your password">
+                            <span class="password-toggle" onclick="togglePassword('password')">
+                                <i class="fas fa-eye"></i>
+                            </span>
+                        </div>
+                        
+                        <div class="form-group" style="display: flex; justify-content: space-between;">
+                            <div>
+                                <input type="checkbox" id="remember">
+                                <label for="remember">Remember me</label>
+                            </div>
+                            <a href="#" style="color: var(--primary);">Forgot password?</a>
+                        </div>
+                        
+                        <button class="auth-btn" onclick="login()">Login</button>
+                        
+                        <div class="auth-footer">
+                            <p>Don't have an account? <a href="#" onclick="switchTab('signup')">Sign up now</a></p>
+                        </div>
+                    </div>
+                    
+                    <div id="signup-form" style="display: none;">
+                        <h2 class="auth-title">Create New Account</h2>
+                        <p class="auth-subtitle">Join thousands of students preparing for Class 11 entrance</p>
+                        
+                        <div class="form-group">
+                            <label for="fullname">Full Name</label>
+                            <input type="text" id="fullname" class="form-control" placeholder="Enter your full name">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="signup-email">Email Address</label>
+                            <input type="email" id="signup-email" class="form-control" placeholder="Enter your email">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="signup-password">Password</label>
+                            <input type="password" id="signup-password" class="form-control" placeholder="Create a password">
+                            <span class="password-toggle" onclick="togglePassword('signup-password')">
+                                <i class="fas fa-eye"></i>
+                            </span>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="confirm-password">Confirm Password</label>
+                            <input type="password" id="confirm-password" class="form-control" placeholder="Confirm your password">
+                            <span class="password-toggle" onclick="togglePassword('confirm-password')">
+                                <i class="fas fa-eye"></i>
+                            </span>
+                        </div>
+                        
+                        <button class="auth-btn" onclick="signup()">Sign Up</button>
+                        
+                        <div class="auth-footer">
+                            <p>Already have an account? <a href="#" onclick="switchTab('login')">Login here</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // User management
+        let currentUser = null;
+        
+        // Page navigation function
+        function showPage(pageId) {
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // Show the requested page
+            document.getElementById(pageId).classList.add('active');
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+            
+            // Show welcome message if logged in
+            if (currentUser && pageId === 'home') {
+                document.getElementById('welcome-user').style.display = 'block';
+                document.getElementById('welcome-name').textContent = currentUser.name;
+            } else {
+                document.getElementById('welcome-user').style.display = 'none';
+            }
+        }
+
+        // Switch between login and signup tabs
+        function switchTab(tab) {
+            if (tab === 'login') {
+                document.getElementById('login-form').style.display = 'block';
+                document.getElementById('signup-form').style.display = 'none';
+                document.querySelectorAll('.tab')[0].classList.add('active');
+                document.querySelectorAll('.tab')[1].classList.remove('active');
+            } else {
+                document.getElementById('login-form').style.display = 'none';
+                document.getElementById('signup-form').style.display = 'block';
+                document.querySelectorAll('.tab')[0].classList.remove('active');
+                document.querySelectorAll('.tab')[1].classList.add('active');
+            }
+        }
+
+        // Toggle password visibility
+        function togglePassword(fieldId) {
+            const field = document.getElementById(fieldId);
+            const toggle = field.nextElementSibling.querySelector('i');
+            
+            if (field.type === 'password') {
+                field.type = 'text';
+                toggle.classList.remove('fa-eye');
+                toggle.classList.add('fa-eye-slash');
+            } else {
+                field.type = 'password';
+                toggle.classList.remove('fa-eye-slash');
+                toggle.classList.add('fa-eye');
+            }
+        }
+
+        // Login function
+        function login() {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            
+            if(email && password) {
+                // For demo purposes, accept any non-empty credentials
+                currentUser = {
+                    name: email.split('@')[0] || 'Student',
+                    email: email
+                };
+                
+                // Update UI for logged in user
+                document.getElementById('user-section').style.display = 'flex';
+                document.getElementById('auth-buttons').style.display = 'none';
+                document.getElementById('username-display').textContent = currentUser.name;
+                
+                // Show subjects page
+                showPage('subjects');
+            } else {
+                alert('Please enter both email and password');
+            }
+        }
+
+        // Signup function
+        function signup() {
+            const fullname = document.getElementById('fullname').value;
+            const email = document.getElementById('signup-email').value;
+            const password = document.getElementById('signup-password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+            
+            if(fullname && email && password && password === confirmPassword) {
+                currentUser = {
+                    name: fullname,
+                    email: email
+                };
+                
+                // Update UI for logged in user
+                document.getElementById('user-section').style.display = 'flex';
+                document.getElementById('auth-buttons').style.display = 'none';
+                document.getElementById('username-display').textContent = currentUser.name;
+                
+                // Show subjects page
+                showPage('subjects');
+            } else {
+                alert('Please fill all fields and ensure passwords match');
+            }
+        }
+
+        // Logout function
+        function logout() {
+            currentUser = null;
+            document.getElementById('user-section').style.display = 'none';
+            document.getElementById('auth-buttons').style.display = 'flex';
+            showPage('home');
+        }
+
+        // Question bank functionality
+        let currentSubject = 'physics';
+        let currentQuestionIndex = 0;
+        let userAnswers = [];
+        
+        const questionsDatabase = {
+            math: [
+                {
+                    text: "What is the value of π (pi) to two decimal places?",
+                    options: ["3.14", "3.16", "3.18", "3.12"],
+                    answer: 0
+                },
+                {
+                    text: "What is the derivative of x²?",
+                    options: ["x", "2x", "x²", "2x²"],
+                    answer: 1
+                },
+                {
+                    text: "In a right-angled triangle, if the opposite side is 3 and the adjacent is 4, what is the hypotenuse?",
+                    options: ["5", "6", "7", "8"],
+                    answer: 0
+                },
+                {
+                    text: "What is the solution to the equation 2x + 5 = 15?",
+                    options: ["x = 5", "x = 10", "x = 7.5", "x = 2.5"],
+                    answer: 0
+                },
+                {
+                    text: "What is the area of a circle with radius 7?",
+                    options: ["49π", "14π", "21π", "28π"],
+                    answer: 0
+                },
+                {
+                    text: "What is the value of log₁₀(100)?",
+                    options: ["1", "2", "10", "100"],
+                    answer: 1
+                },
+                {
+                    text: "What is the slope of the line y = 3x + 2?",
+                    options: ["2", "3", "5", "1"],
+                    answer: 1
+                },
+                {
+                    text: "What is the sum of the angles in a triangle?",
+                    options: ["90°", "180°", "270°", "360°"],
+                    answer: 1
+                },
+                {
+                    text: "What is the formula for the volume of a sphere?",
+                    options: ["4/3πr³", "πr²h", "2πr", "4πr²"],
+                    answer: 0
+                },
+                {
+                    text: "What is the next prime number after 7?",
+                    options: ["8", "9", "10", "11"],
+                    answer: 3
+                }
+            ],
+            physics: [
+                {
+                    text: "The SI unit of gravitational constant is:",
+                    options: ["N m²/kg²", "N m²/kg", "N m/kg²", "N/kg"],
+                    answer: 0
+                },
+                {
+                    text: "A body is moving with uniform velocity. Its acceleration is:",
+                    options: ["Constant", "Zero", "Increasing", "Decreasing"],
+                    answer: 1
+                },
+                {
+                    text: "The dimensional formula for impulse is:",
+                    options: ["[MLT⁻¹]", "[MLT⁻²]", "[ML²T⁻¹]", "[M⁰L⁰T⁻¹]"],
+                    answer: 0
+                },
+                {
+                    text: "The force required to keep a body in uniform circular motion is called:",
+                    options: ["Centripetal force", "Centrifugal force", "Gravitational force", "Electrostatic force"],
+                    answer: 0
+                },
+                {
+                    text: "The work done by a conservative force is:",
+                    options: ["Path dependent", "Path independent", "Always zero", "Always negative"],
+                    answer: 1
+                },
+                {
+                    text: "The refractive index of water is 1.33. The speed of light in water is:",
+                    options: ["3 × 10⁸ m/s", "2.26 × 10⁸ m/s", "4 × 10⁸ m/s", "1.33 × 10⁸ m/s"],
+                    answer: 1
+                },
+                {
+                    text: "Which of the following is not a unit of power?",
+                    options: ["Watt", "Joule/second", "Kilowatt-hour", "Horsepower"],
+                    answer: 2
+                },
+                {
+                    text: "The phenomenon of electromagnetic induction was discovered by:",
+                    options: ["Faraday", "Maxwell", "Oersted", "Ampere"],
+                    answer: 0
+                },
+                {
+                    text: "The half-life of a radioactive element is 10 days. The fraction that remains after 30 days is:",
+                    options: ["1/2", "1/4", "1/8", "1/16"],
+                    answer: 2
+                },
+                {
+                    text: "The energy band gap is maximum in:",
+                    options: ["Metals", "Semiconductors", "Insulators", "Superconductors"],
+                    answer: 2
+                }
+            ],
+            chemistry: [
+                {
+                    text: "What is the atomic number of Carbon?",
+                    options: ["6", "12", "14", "8"],
+                    answer: 0
+                },
+                {
+                    text: "Which of these is a noble gas?",
+                    options: ["Oxygen", "Nitrogen", "Argon", "Chlorine"],
+                    answer: 2
+                },
+                {
+                    text: "What is the pH value of pure water?",
+                    options: ["5", "7", "10", "14"],
+                    answer: 1
+                },
+                {
+                    text: "Which element has the chemical symbol 'Au'?",
+                    options: ["Silver", "Gold", "Aluminum", "Argon"],
+                    answer: 1
+                },
+                {
+                    text: "What is the main component of natural gas?",
+                    options: ["Ethane", "Propane", "Butane", "Methane"],
+                    answer: 3
+                },
+                {
+                    text: "Which of these is not a state of matter?",
+                    options: ["Solid", "Liquid", "Gas", "Energy"],
+                    answer: 3
+                },
+                {
+                    text: "What is the chemical formula for table salt?",
+                    options: ["NaCl", "H₂O", "CO₂", "C₆H₁₂O₆"],
+                    answer: 0
+                },
+                {
+                    text: "Which process converts liquid to gas?",
+                    options: ["Condensation", "Evaporation", "Sublimation", "Deposition"],
+                    answer: 1
+                },
+                {
+                    text: "What is the lightest element?",
+                    options: ["Helium", "Hydrogen", "Lithium", "Oxygen"],
+                    answer: 1
+                },
+                {
+                    text: "Which acid is found in vinegar?",
+                    options: ["Citric acid", "Acetic acid", "Sulfuric acid", "Hydrochloric acid"],
+                    answer: 1
+                }
+            ],
+            biology: [
+                {
+                    text: "What is the powerhouse of the cell?",
+                    options: ["Nucleus", "Mitochondria", "Ribosome", "Endoplasmic Reticulum"],
+                    answer: 1
+                },
+                {
+                    text: "Which process do plants use to make food?",
+                    options: ["Respiration", "Photosynthesis", "Transpiration", "Fermentation"],
+                    answer: 1
+                },
+                {
+                    text: "What is the basic unit of life?",
+                    options: ["Atom", "Cell", "Molecule", "Organ"],
+                    answer: 1
+                },
+                {
+                    text: "Which blood type is the universal donor?",
+                    options: ["A", "B", "AB", "O"],
+                    answer: 3
+                },
+                {
+                    text: "What is the largest organ in the human body?",
+                    options: ["Liver", "Brain", "Skin", "Heart"],
+                    answer: 2
+                },
+                {
+                    text: "Which part of the plant absorbs water?",
+                    options: ["Leaves", "Stem", "Roots", "Flowers"],
+                    answer: 2
+                },
+                {
+                    text: "How many chromosomes do humans have?",
+                    options: ["23", "46", "64", "32"],
+                    answer: 1
+                },
+                {
+                    text: "Which gas do plants release during photosynthesis?",
+                    options: ["Oxygen", "Carbon Dioxide", "Nitrogen", "Hydrogen"],
+                    answer: 0
+                },
+                {
+                    text: "What is the study of fossils called?",
+                    options: ["Ecology", "Paleontology", "Genetics", "Anatomy"],
+                    answer: 1
+                },
+                {
+                    text: "Which vitamin is produced when skin is exposed to sunlight?",
+                    options: ["Vitamin A", "Vitamin B12", "Vitamin C", "Vitamin D"],
+                    answer: 3
+                }
+            ],
+            english: [
+                {
+                    text: "Which of these is a synonym for 'benevolent'?",
+                    options: ["Cruel", "Kind", "Selfish", "Stingy"],
+                    answer: 1
+                },
+                {
+                    text: "What is the past tense of 'go'?",
+                    options: ["Goed", "Went", "Gone", "Goes"],
+                    answer: 1
+                },
+                {
+                    text: "Which of these is a preposition?",
+                    options: ["And", "But", "Under", "Quickly"],
+                    answer: 2
+                },
+                {
+                    text: "What figure of speech is 'The world is a stage'?",
+                    options: ["Simile", "Metaphor", "Personification", "Hyperbole"],
+                    answer: 1
+                },
+                {
+                    text: "Which word is spelled correctly?",
+                    options: ["Accomodate", "Acommodate", "Accommodate", "Acomodate"],
+                    answer: 2
+                },
+                {
+                    text: "What is the plural of 'child'?",
+                    options: ["Childs", "Childes", "Children", "Child's"],
+                    answer: 2
+                },
+                {
+                    text: "Which of these is a conjunction?",
+                    options: ["Run", "Beautiful", "Because", "Quickly"],
+                    answer: 2
+                },
+                {
+                    text: "What is the antonym of 'ancient'?",
+                    options: ["Old", "Modern", "Historic", "Antique"],
+                    answer: 1
+                },
+                {
+                    text: "Who wrote 'Romeo and Juliet'?",
+                    options: ["Charles Dickens", "William Shakespeare", "Jane Austen", "Mark Twain"],
+                    answer: 1
+                },
+                {
+                    text: "Which sentence is in passive voice?",
+                    options: ["The cat chased the mouse", "The mouse was chased by the cat", "The cat is chasing the mouse", "The mouse runs from the cat"],
+                    answer: 1
+                }
+            ]
+        };
+
+        function showQuestionBank(subject) {
+            if (!currentUser) {
+                alert("Please login to access question banks");
+                showPage('auth');
+                return;
+            }
+            
+            currentSubject = subject;
+            const subjectNames = {
+                'math': 'Mathematics',
+                'physics': 'Physics',
+                'chemistry': 'Chemistry',
+                'biology': 'Biology',
+                'english': 'English'
+            };
+            
+            document.getElementById('quiz-subject-title').textContent = subjectNames[subject] + ' Practice';
+            document.querySelector('.progress').style.background = `linear-gradient(90deg, ${getSubjectColor(subject)}, ${getSubjectColor(subject, true)})`;
+            userAnswers = [];
+            loadQuestion(0);
+            showPage('question-bank');
+        }
+
+        function getSubjectColor(subject, darker = false) {
+            const colors = {
+                'math': darker ? '#3a0ca3' : '#4361ee',
+                'physics': darker ? '#b5179e' : '#f72585',
+                'chemistry': darker ? '#4895ef' : '#4cc9f0',
+                'biology': darker ? '#1a936f' : '#2ec4b6',
+                'english': darker ? '#ff5400' : '#ff9f1c'
+            };
+            return colors[subject];
+        }
+
+        function loadQuestion(index) {
+            const questions = questionsDatabase[currentSubject];
+            const question = questions[index];
+            const questionContainer = document.getElementById('question-container');
+            currentQuestionIndex = index;
+            
+            // Update progress bar
+            const progress = ((index + 1) / questions.length) * 100;
+            document.getElementById('quiz-progress').style.width = `${progress}%`;
+            
+            // Update question counter
+            document.getElementById('current-question').textContent = index + 1;
+            
+            // Build question HTML
+            let optionsHtml = '';
+            question.options.forEach((option, i) => {
+    optionsHtml += `
+    <label class="option" onclick="selectOption(${i}, ${index})">
+               <input type="radio" name="question${index}" value="${i}"> 
+             ${option}
+          </label>
+`                ;
+            });
+            
+            questionContainer.innerHTML = `
+                <div class="question">
+                    <div class="question-text">${index + 1}. ${question.text}</div>
+                    <div class="options">${optionsHtml}</div>
+                </div>
+            `;
+        }
+
+      function selectOption(optionIndex, questionIndex) {
+    userAnswers[questionIndex] = optionIndex;
+    
+    // Highlight selected option
+    const options = document.querySelectorAll('.option');
+    options.forEach(opt => opt.classList.remove('selected'));
+    event.currentTarget.classList.add('selected');
+    
+    // Auto advance after 1 second
+    setTimeout(() => {
+        // Use the questionIndex parameter directly
+        if (questionIndex < questionsDatabase[currentSubject].length - 1) {
+            // Load the very next question
+            loadQuestion(questionIndex + 1);
+        } else {
+            showResults();
+        }
+    }, 1000);
+}
+
+        function showResults() {
+            const questions = questionsDatabase[currentSubject];
+            let correct = 0;
+            
+            for (let i = 0; i < questions.length; i++) {
+                if (userAnswers[i] === questions[i].answer) {
+                    correct++;
+                }
+            }
+            
+            const attempted = questions.length;
+            const wrong = attempted - correct;
+            const accuracy = Math.round((correct / attempted) * 100);
+            
+            document.getElementById('result-score').textContent = `${correct}/${attempted}`;
+            document.getElementById('attempted').textContent = attempted;
+            document.getElementById('correct').textContent = correct;
+            document.getElementById('wrong').textContent = wrong;
+            document.getElementById('accuracy').textContent = `${accuracy}%`;
+            
+            showPage('results');
+        }
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            showPage('home');
+        });
+    </script>
+</body>
+</html>
